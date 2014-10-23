@@ -1,0 +1,9 @@
+﻿body {
+}
+#OpenCalendar {
+    position: absolute;
+    width: 80%;
+    height: 70%;
+    margin-left: 10%;
+    margin-top: 5%;
+}
