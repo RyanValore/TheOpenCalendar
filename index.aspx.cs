@@ -16,6 +16,7 @@ public partial class index : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
         if (!IsPostBack)
         {
             GetEvents();
@@ -46,12 +47,24 @@ public partial class index : System.Web.UI.Page
 
     protected void OpenCalendar_Load(object sender, DayRenderEventArgs e)
     {
+        e.Cell.Text = string.Empty;
+        Label lblDay = new Label();
+        lblDay.Text = e.Day.Date.ToString("dd") + "<br />";
+        e.Cell.Controls.Add(lblDay);
         string tooltip = string.Empty;
         if (IsEventDay(e.Day.Date, out tooltip))
         {
             e.Cell.BackColor = System.Drawing.Color.Pink;
             e.Day.IsSelectable = false;
             e.Cell.ToolTip = tooltip;
+
+            LinkButton btn = new LinkButton();
+            btn.ID = "Date" + e.Day.Date.ToString("MMddyyyy");
+            btn.Text = "Go To This Days Events";
+            string url = "xx";
+            btn.Attributes.Add("onclick", "window.open('" + url + "');");
+            e.Cell.Controls.Add(btn);
+
         }
         if (e.Day.IsWeekend)
         {
@@ -59,6 +72,11 @@ public partial class index : System.Web.UI.Page
             e.Cell.ForeColor = System.Drawing.Color.White;
             e.Day.IsSelectable = false;
         }
+
+        
+        
+
+        
     }
 
     private bool IsEventDay(DateTime day, out string tooltipvalue)
