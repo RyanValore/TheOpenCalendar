@@ -14,6 +14,7 @@ public partial class index : System.Web.UI.Page
     private List<DateTime> events = new List<DateTime>();
     private List<string> eventname = new List<string>();
 
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -48,9 +49,13 @@ public partial class index : System.Web.UI.Page
     protected void OpenCalendar_Load(object sender, DayRenderEventArgs e)
     {
         e.Cell.Text = string.Empty;
-        Label lblDay = new Label();
-        lblDay.Text = e.Day.Date.ToString("dd") + "<br />";
-        e.Cell.Controls.Add(lblDay);
+        Button btn = new Button();
+        btn.ID = "Date";
+        btn.Text = e.Day.Date.ToString("MM-dd-yyyy");
+        string day = e.Day.Date.ToString("mmddyyyy");
+        btn.Attributes.Add("onclick", "window.open('EventDay.aspx');");
+
+        e.Cell.Controls.Add(btn);
         string tooltip = string.Empty;
         if (IsEventDay(e.Day.Date, out tooltip))
         {
@@ -58,12 +63,8 @@ public partial class index : System.Web.UI.Page
             e.Day.IsSelectable = false;
             e.Cell.ToolTip = tooltip;
 
-            LinkButton btn = new LinkButton();
-            btn.ID = "Date" + e.Day.Date.ToString("MMddyyyy");
-            btn.Text = "Go To This Days Events";
-            string url = "xx";
-            btn.Attributes.Add("onclick", "window.open('" + url + "');");
-            e.Cell.Controls.Add(btn);
+            
+            
 
         }
         if (e.Day.IsWeekend)
@@ -96,5 +97,10 @@ public partial class index : System.Web.UI.Page
     protected void OpenCalendar_SelectionChanged(object sender, MonthChangedEventArgs e)
     {
         GetEvents();
+    }
+
+    protected void Redirect(object sender, EventArgs e)
+    {
+
     }
 }
