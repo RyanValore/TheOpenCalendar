@@ -51,9 +51,9 @@ public partial class index : System.Web.UI.Page
         e.Cell.Text = string.Empty;
         Button btn = new Button();
         btn.ID = "Date";
-        btn.Text = e.Day.Date.ToString("MM-dd-yyyy");
-        string day = e.Day.Date.ToString("mmddyyyy");
-        btn.Attributes.Add("onclick", "window.open('EventDay.aspx');");
+        btn.Text = e.Day.Date.ToString("MM/dd/yyyy");
+        string day = e.Day.Date.ToString("MM/dd/yyyy");
+        btn.Attributes.Add("onclick", "Redirect('" + e.Day.Date.ToString("MM/dd/yyyy").ToString() + "')");
 
         e.Cell.Controls.Add(btn);
         string tooltip = string.Empty;
@@ -97,10 +97,5 @@ public partial class index : System.Web.UI.Page
     protected void OpenCalendar_SelectionChanged(object sender, MonthChangedEventArgs e)
     {
         GetEvents();
-    }
-
-    protected void Redirect(object sender, EventArgs e)
-    {
-
     }
 }

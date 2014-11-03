@@ -6,6 +6,14 @@
 <head runat="server">
     <title></title>
     <link href="StyleSheet.css" rel="stylesheet" />
+
+    <script>
+        function Redirect(id)
+        {
+            window.open("EventDay.aspx?SendingDate=" + id );
+        }
+
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
